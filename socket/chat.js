@@ -38,8 +38,6 @@ io.on('connection', (socket) => {
   console.log('⚡ A user connected with session:', socket.request.session);
     const req = socket.request;
 
-    const user = req.user || { _id: req.session.user, isGuest: true }
-
    socket.on('joinRoom', ({ giftId }) => {  
   console.log(`📦 User joined room for gift ${giftId}`);
       const roomName = `gift_${giftId}`;

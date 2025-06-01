@@ -24,11 +24,11 @@ const userSchema = new mongoose.Schema(
     buyer: {
       type: String,
       default: null,
+    },
 
     deleted: {
       type: Boolean,
       default: false,
-
     },
   },
   { timestamps: true },

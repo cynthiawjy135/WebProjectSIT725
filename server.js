@@ -1,5 +1,7 @@
+const { v4: uuidv4 } = require('uuid');
 const cookieParser = require('cookie-parser');
 const express = require('express');
+const bodyParser = require('body-parser');
 const path = require('path');
 const connectDB = require('./db');
 const routes = require('./routes');
@@ -19,17 +21,52 @@ const quizAdminRoutes = require('./routes/quizAdminRoutes');
 const app = express();
 const port = 3000;
 
+const passport = require('./middlewares/passport');
+const { Server } = require('socket.io');
+const { setupSocket } = require('./socket/chat');
+const http = require('http');
+const socketio = require('socket.io');
+require('dotenv').config();
+const flash = require('connect-flash');
+
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+app.use(bodyParser.json({ limit: '10mb' }));
 
 
 app.use(cookieParser());
+const session = require('express-session');
 
-app.use(
+const sessionMiddleware = session({
+  secret: process.env.SESSION_SECRET || "Secure_Secret_Key",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    secure: false
+  }
+});
+
+// Use it in Express
+
+app.use(sessionMiddleware,
   cors({
     origin: 'http://localhost:3000',
     credentials: true,
   }),
 );
+
+app.use(flash());
+// Makes messages available in all EJS views
+app.use((req, res, next) => {
+  res.locals.messages = {
+    success: req.flash('success'),
+    error: req.flash('error')
+  };
+  next();
+});
+
+
 
 app.use(passport.initialize());
 app.set('view engine', 'ejs');
@@ -43,6 +80,7 @@ connectDB();
 app.use('/', routes);
 
 
+
 const server = http.createServer(app);
 
 const io = socketIo(server, {
@@ -51,6 +89,11 @@ const io = socketIo(server, {
     methods: ["GET", "POST"]
   }
 });
+
+// === Socket.IO Setup (in socket/chat.js) ===
+setupSocket(io, sessionMiddleware);
+
+  
 io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
   likeNotificationSocket(io, socket);

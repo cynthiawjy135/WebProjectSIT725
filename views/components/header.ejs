@@ -46,11 +46,15 @@
             <ul class="right hide-on-med-and-down">
                 <li><a href="/">Home</a></li>
                 <li><a href="/secretAngel">Secret Angel Game</a></li>
+                <li><a href="/gifts">Gift Marketplace</a></li>
+  <li>
+                    <a href="/gifts/cart" class="tooltipped" data-tooltip="My Cart">
+                        <i class="material-icons">shopping_cart</i>
+                    </a>
+                </li>
                 <li><a href="/communityMainPage">Gift Ideas Community</a></li>
                 <li><a href="/eventReminder">Event Reminder</a></li>
                 <li><a href="/quizForm">Quiz</a></li>
-
-                <% if (user) { %>
 
                     <li>
                         <a class="dropdown-trigger" href="#" data-target="user-dropdown" data-position="bottom">
@@ -75,9 +79,11 @@
         </div>
     </nav>
 
+
     <ul class="sidenav" id="mobile-nav">
         <li><a href="/">Home</a></li>
         <li><a href="/secretAngel">Secret Angel Game</a></li>
+          <li><a href="/gifts">Gift Marketplace</a></li>
         <li><a href="/communityMainPage">Gift Ideas Community</a></li>
         <li><a href="/eventReminder">Event Reminder</a></li>
         <li><a href="/quizForm">Quiz</a></li>
@@ -89,7 +95,6 @@
                 <li><a href="/signup">Sign Up</a></li>
                 <% } %>
     </ul>
-
     <ul id="user-dropdown" class="dropdown-content">
         <li><a href="/settings" style="color:#dc5d3b;"><i class="material-icons">settings</i>Settings</a></li>
         <li class="divider" tabindex="-1"></li>

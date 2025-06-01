@@ -2,8 +2,12 @@ const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middlewares/authMiddleware');
 const jwt = require('jsonwebtoken');
+
+const giftService = require('../services/giftService');
+
 const { postController } = require('../controllers');
 const secretAngelRouter = require('./pages/secretAngelPages');
+
 
 
 router.get('/', authMiddleware, (req, res) => {
@@ -68,11 +72,15 @@ router.get('/quizForm', authMiddleware, (req, res) => {
   res.render('quizForm', { error: null, user: req.user });
 });
 
+
+router.get('/giftMarketplace', async (req, res) => {
+  const gifts = await giftService.getAllGifts(); // Fetch the gifts
+  res.render('giftMarketplace/index', { gifts, user: req.user }); // Pass 'gifts' and 'user' to the template
+});
 //Quiz recommendation page
 router.get('/quizRecommendation', authMiddleware, (req, res) => {
   res.render('quizRecommendation', { error: null, user: req.user });
 });
-
 
 
 module.exports = router;

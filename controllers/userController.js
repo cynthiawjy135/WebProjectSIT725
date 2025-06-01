@@ -3,6 +3,13 @@ const jwt = require('jsonwebtoken');
 const path = require('path');
 const fs = require('fs');
 const signJWT = require('../helpers/signJWT');
+const Cart = require('../models/cart');
+const Gift = require('../models/gift');
+const User = require('../models/user');
+const { handleCartOnLogout } = require('../services/cartService'); 
+const { loadCartFromDB } = require('../services/cartService'); 
+
+
 
 const userController = {
   getAllUsers: async (req, res) => {
@@ -24,6 +31,7 @@ const userController = {
           name: user.name,
           email: user.email,
           avatar: user.avatar,
+          buyer: user.buyer,
         });
 
         res.cookie('token', token, {
@@ -33,6 +41,8 @@ const userController = {
           sameSite: 'lax',
         });
 
+        await loadCartFromDB(req, token);
+      
         return res.json({ message: 'Login successful' });
       } else {
         res.status(401).json({ message: 'Invalid credentials' });
@@ -43,8 +53,8 @@ const userController = {
   },
   signup: async (req, res) => {
     try {
-      const { name, email, password } = req.body;
-      const newUser = await userService.signup({ name, email, password });
+      const { name, email, password, buyer } = req.body;
+      const newUser = await userService.signup({ name, email, password, buyer });
       res
         .status(201)
         .json({ message: 'User created successfully', user: newUser });
@@ -132,6 +142,7 @@ const userController = {
           id: updatedUser._id,
           name: updatedUser.name,
           avatar: updatedUser.avatar,
+          buyer: updatedUser.buyer,
         },
         process.env.JWT_SECRET || 'default_secret',
       );
@@ -150,7 +161,10 @@ const userController = {
       res.status(500).json({ message: 'Server error', error: error.message });
     }
   },
-  logout: (req, res) => {
+  logout: async (req, res) => {
+     
+    await handleCartOnLogout(req);
+
     res.clearCookie('token', {
       httpOnly: true,
       sameSite: 'lax',

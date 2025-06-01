@@ -36,8 +36,8 @@ Giftzy is a web application built using **Node.js** that provides smart solution
 - **✨ Secret Angel Game** :
 - [**🎁Gift Recommendations** :](https://www.figma.com/design/eYVMqe8pcDNxO87Vr5MK6v/SIT725-Wireframes?node-id=1-2&t=S7klg0PxhvFi3bn7-1)
 
-## API Documentation
-
+## User Authentication APIs Documentation
+---
 /api/users
 
 - `GET` : Get all users
@@ -54,26 +54,8 @@ Giftzy is a web application built using **Node.js** that provides smart solution
 
 - `POST` : user forget password
 
-/api/posts/addpost
-
-- `POST` : Upload new Post
-
-/api/posts/loadMorePosts
-
-- `GET` : Load more 5 Posts
-
-/api/posts/like/:postId
-
-- `POST` : Toggle like a post
-
-/api/communityMainPage
-
-- `GET` : Load gift ideas community page
-
-/api/detailPostPage
-
-- `GET` : Load detail post page
-
+## Gift Recommendation APIs Documentation
+---
 /api/posts/quizSubmit
 
 - `POST` : Submit quiz answers and receive gift suggestions
@@ -116,21 +98,28 @@ Giftzy is a web application built using **Node.js** that provides smart solution
 -`DELETE`: Delete selected events
 
 
-## API Documentation
-/api/users
-- `GET` : Get all users
-
-/api/users/google
-- `GET` : Authenticate user login by Google
-
-/api/users/login
-- `POST` : User login
-
-/api/users/forget-password
-- `POST` : user forget password
-
+## Gift Ideas Community APIs Documentation
+---
 /api/posts/addpost
+
 - `POST` : Upload new Post
+
+/api/posts/loadMorePosts
+
+- `GET` : Load more 5 Posts
+
+/api/posts/like/:postId
+
+- `POST` : Toggle like a post
+
+/api/communityMainPage
+
+- `GET` : Load gift ideas community page
+
+/api/detailPostPage
+
+- `GET` : Load detail post page
+
 
 # 🚀 Gift Marketplace APIs
 

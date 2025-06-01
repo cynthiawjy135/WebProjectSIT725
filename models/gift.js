@@ -1,3 +1,7 @@
+//Description: This file defines the Gift model schema for a MongoDB database using Mongoose.
+// It includes fields for gift details such as name, description, price, image URL, availability, category, and seller information.
+// It also includes fields for reviews and ratings, allowing users to leave feedback on gifts.
+
 const mongoose = require('mongoose');
 
 const giftSchema = new mongoose.Schema({

@@ -66,7 +66,7 @@ app.use(express.urlencoded({ extended: false }));
 connectDB();
 
 app.use('/', routes);
-
+  
 // === Socket.IO Setup (in socket/chat.js) ===
 setupSocket(io, sessionMiddleware);
 server.listen(port, () => {

@@ -1,3 +1,6 @@
+//DEscription: This file defines the Gift model schema for a MongoDB database using Mongoose.
+// This schema includes fields for gift details, seller information, reviews, and more.
+
 const mongoose = require('mongoose');
 
 const cartSchema = new mongoose.Schema({

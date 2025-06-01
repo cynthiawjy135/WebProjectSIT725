@@ -1,3 +1,6 @@
+//Description: This service handles all operations related to gifts in the gift marketplace.
+// It handles chat functionality for gifts, including viewing chat rooms, fetching chat history, and processing sale success.
+
 const Chat = require('../models/chat');
 const Gift = require('../models/gift');
 const User = require('../models/user');
@@ -42,7 +45,7 @@ const { giftId } = req.params;
     await gift.save();
 
     req.flash('success', `Purchase verified! Availability reduced by ${qty}.`);
-    
+
     res.redirect(`/gifts/${giftId}?chatStarted=true`);
   } catch (err) {
     console.error(err);

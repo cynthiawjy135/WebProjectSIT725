@@ -1,3 +1,6 @@
+//Description: This service handles all operations related to gifts in the gift marketplace.
+// It includes functions to get, create, update, delete gifts, and manage reviews
+// This service is used by the gift controller to interact with the database and perform operations.
 const e = require('express');
 const Gift = require('../models/gift');
 const jwt = require('jsonwebtoken');

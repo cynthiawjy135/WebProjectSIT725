@@ -1,3 +1,6 @@
+//Description: This service handles all operations related to gifts in the gift marketplace.
+//It includes cart management functions such as adding items, removing items, and clearing the cart.
+
 const giftService = require('../services/giftService.js');
 const Gift = require('../models/gift');
 const User = require('../models/user');

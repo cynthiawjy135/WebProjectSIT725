@@ -109,12 +109,6 @@ const reader = new FileReader();
   imageUrlFile.addEventListener('change', () => {
     const file = imageUrlFile.files[0];
     
-    if (file && file.size > 5 * 1024 * 1024) { // 5MB limit
-    alert("Image file too large! Please choose a smaller image.");
-    imageUrlFile.value = ''; // clear the input
-    return;
-  }
-    
     if (file) {
       reader.onload = () => {
         imageBase64Field.value = reader.result;

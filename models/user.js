@@ -20,12 +20,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
-
     buyer: {
       type: String,
       default: null,
     },
-
     deleted: {
       type: Boolean,
       default: false,
@@ -33,6 +31,5 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
-
 
 module.exports = mongoose.models.User || mongoose.model('User', userSchema);

@@ -21,10 +21,9 @@ const quizAdminRoutes = require('./routes/quizAdminRoutes');
 const app = express();
 const port = 3000;
 
-const passport = require('./middlewares/passport');
 const { Server } = require('socket.io');
 const { setupSocket } = require('./socket/chat');
-const http = require('http');
+
 const socketio = require('socket.io');
 require('dotenv').config();
 const flash = require('connect-flash');

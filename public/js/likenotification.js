@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userId = document.body.getAttribute('data-user-id');
     if (!userId) return;
 
+    //create socket connection and send the query parameter that will be received from server.js
     const socket = io({
       query: { userId }
     });

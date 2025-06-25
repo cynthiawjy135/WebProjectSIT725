@@ -24,8 +24,10 @@ module.exports = (io, socket) => {
 
 //send notif to the post creator
 module.exports.emitToUser = (io, userId, event, data) => {
+  //Search for active socketID of post creator, userID = post creator ID
   const socketIds = userSocketMap.get(userId);
   if (socketIds) {
+    //send to post creator active events
     socketIds.forEach(socketId => {
       io.to(socketId).emit(event, data);
     });
